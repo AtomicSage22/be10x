@@ -24,7 +24,7 @@ function SignupForm() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = axios.post('/api/auth/signup', { firstName, lastName,  email, password });
+    const response = await axios.post('/api/auth/signup', { firstName, lastName,  email, password });
     console.log(response.data)
     console.log("Form submitted");
   };

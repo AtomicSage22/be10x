@@ -5,10 +5,18 @@ import { useRouter } from 'next/navigation';
 import { use, useEffect, useState } from 'react';
 import axios from 'axios';
 
+interface Book {
+  _id: string;
+  title: string;
+  author: string;
+  description: string;
+  price: number;
+}
+
 const AdminPage = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState<Book[]>([]);
   const [newBook, setNewBook] = useState({ title: '', author: '', description: '', price: '' });
 
 //   useEffect(() => {
@@ -34,7 +42,7 @@ useEffect(() => {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewBook((prev) => ({ ...prev, [name]: value }));
   };
@@ -49,7 +57,7 @@ useEffect(() => {
     }
   };
 
-  const deleteBook = async (id) => {
+  const deleteBook = async (id: string | number) => {
     try {
       await axios.delete(`/api/books/${id}`);
       fetchBooks();

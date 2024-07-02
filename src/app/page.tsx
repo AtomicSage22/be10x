@@ -6,8 +6,16 @@ import Link from 'next/link';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react';
 
+interface Book {
+  _id: string;
+  title: string;
+  author: string;
+  description: string;
+  price: number;
+}
+
 const HomePage = () => {
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState<Book[]>([]);
   const router = useRouter();
 
   useEffect(() => {

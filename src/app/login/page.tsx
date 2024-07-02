@@ -23,17 +23,17 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = await signIn('credentials', {
       redirect: false,
       email,
       password,
     });
-
-    if (result.error) {
+  
+    if (result?.error) { // Using optional chaining to safely access `error`
       setError(result.error);
-    } else {
+    } else if (result) { // Check if result is defined before attempting to redirect
       // Redirect to home or a specific page after successful login
       window.location.href = '/';
     }
@@ -82,7 +82,7 @@ const LoginPage = () => {
               Login &rarr;
               <BottomGradient />
             </button>
-            <p className="text-white text-center">Don't have an account yet? <Link className="text-blue" href='/signup'>click here</Link> to sign in</p>
+            <p className="text-white text-center">Don@apost have an account yet? <Link className="text-blue" href='/signup'>click here</Link> to sign in</p>
             <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
             <div className="flex flex-col space-y-4">
               <button
