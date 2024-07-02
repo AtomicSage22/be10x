@@ -24,7 +24,7 @@ const BookDetails = ({ book }: any) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/books/${params?.id}`);
+  const res = await axios.get(`/api/books/${params?.id}`);
   return { props: { book: res.data.data } };
 };
 
